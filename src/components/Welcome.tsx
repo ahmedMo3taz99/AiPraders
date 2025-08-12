@@ -391,14 +391,14 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSendSuggestedMessage }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.01, duration: 0.5 }}
           >
-            <span className="bg-gradient-to-r from-white via-emerald-100 to-white bg-clip-text text-transparent filter drop-shadow-lg">
+            <span className=" text-white text-transparent filter drop-shadow-lg">
               <TypewriterText text="مرحباً بك في Pro Traders Group" delay={5} />
             </span>
           </motion.h1>
 
           {/* العنوان الفرعي */}
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 mb-16 max-w-2xl mx-auto leading-relaxed font-light"
+            className="text-xl md:text-2xl text-gray-100 mb-16 max-w-2xl mx-auto leading-relaxed font-light"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 2.2, duration: 0.6 }} // قللت من 4.5 إلى 2.2
