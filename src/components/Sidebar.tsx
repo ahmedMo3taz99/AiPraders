@@ -21,8 +21,6 @@ import { ChatHistoryItem, FavoriteMessage } from "../types";
 import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import { InfiniteScroll } from "./InfiniteScroll";
-import { SearchInput } from "./SearchInput";
-import { chatBotAPI } from "../utils/api";
 import logo from "../assets/logo.png";
 
 interface SidebarProps {
@@ -157,14 +155,6 @@ const ModernButton = ({
   className = "",
   ...props
 }: any) => {
-  const variants = {
-    primary:
-      "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-lg shadow-emerald-500/25",
-    secondary:
-      "bg-gray-800/50 hover:bg-gray-700/50 text-gray-200 border border-gray-600/50 hover:border-emerald-500/50",
-    ghost: "text-gray-300 hover:text-white hover:bg-emerald-500/10",
-  };
-
   return (
     <motion.button
       onClick={onClick}
@@ -287,7 +277,6 @@ const ModernChatItem = ({
 export const Sidebar: React.FC<SidebarProps> = ({
   onToggle,
   isCollapsed = false,
-  onToggleCollapse,
   chatHistory,
   onNewChat,
   onLoadSession,
@@ -310,7 +299,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<ChatHistoryItem[]>([]);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const { logout, token } = useAuth();
+  const { logout } = useAuth();
 
   const itemsPerPage = 10;
 

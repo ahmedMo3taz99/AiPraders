@@ -1,10 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import {
-  motion,
-  useAnimation,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import logo from "../assets/logo.png";
 
@@ -256,13 +251,12 @@ const SimpleLogo = () => {
 // الصناديق المحسنة والبسيطة
 const SimpleCard = ({
   message,
-  index,
   onSendSuggestedMessage,
   delay = 0,
   uniqueId,
 }: {
   message: string;
-  index: number;
+  index?: number; // جعلت index اختيارية
   onSendSuggestedMessage: (message: string) => void;
   delay?: number;
   uniqueId: string;
@@ -317,7 +311,6 @@ const SimpleCard = ({
 
 export const Welcome: React.FC<WelcomeProps> = ({ onSendSuggestedMessage }) => {
   const { t } = useLanguage();
-  const [textVisible, setTextVisible] = useState(false);
 
   // إنشاء timestamp فريد للكومبوننت
   const componentId = useMemo(
@@ -352,11 +345,6 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSendSuggestedMessage }) => {
       },
     }));
   }, [componentId]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setTextVisible(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="welcome-container relative min-h-screen overflow-hidden">
@@ -404,10 +392,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ onSendSuggestedMessage }) => {
             transition={{ delay: 0.01, duration: 0.5 }}
           >
             <span className="bg-gradient-to-r from-white via-emerald-100 to-white bg-clip-text text-transparent filter drop-shadow-lg">
-              <TypewriterText
-                text="مرحباً بك في Pro Traders Group"
-                delay={5}
-              />
+              <TypewriterText text="مرحباً بك في Pro Traders Group" delay={5} />
             </span>
           </motion.h1>
 
