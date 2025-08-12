@@ -1,0 +1,43 @@
+# React Frontend Environment Variables
+# Pro Traders Group Platform - ChatBot
+
+# API Configuration - Centralized
+# Set the environment: development, test, staging, production, mock
+VITE_API_ENVIRONMENT=test
+VITE_API_TIMEOUT=30000
+
+# Mock API Configuration (for testing when real API has issues)
+VITE_USE_MOCK_API=false
+
+# App Configuration
+VITE_APP_NAME="Pro Traders Group"
+VITE_APP_VERSION="1.0.0"
+VITE_APP_DESCRIPTION="شات بوت التداول الذكي"
+
+# Google OAuth Configuration (Optional)
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
+VITE_GOOGLE_CLIENT_SECRET=your_google_client_secret_here
+
+# OpenAI Configuration (for ChatBot)
+VITE_OPENAI_API_KEY=your_openai_api_key_here
+VITE_OPENAI_MODEL=gpt-3.5-turbo
+
+# Feature Flags
+VITE_ENABLE_GOOGLE_LOGIN=true
+VITE_ENABLE_REGISTRATION=true
+VITE_ENABLE_CHATBOT=true
+VITE_ENABLE_EXPORT=true
+
+# UI Configuration
+VITE_DEFAULT_LANGUAGE=ar
+VITE_SUPPORTED_LANGUAGES=ar,en
+VITE_THEME=dark
+
+# Development Configuration
+VITE_DEBUG_MODE=true
+VITE_LOG_LEVEL=debug
+
+# Production Configuration
+VITE_API_BASE_URL=http://pro-traders-group.com/
+VITE_DEBUG_MODE=false
+VITE_LOG_LEVEL=error 

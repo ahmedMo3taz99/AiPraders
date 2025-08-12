@@ -1,0 +1,939 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-700;
+  }
+  
+  body {
+    @apply bg-[#343541] text-white font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    direction: rtl;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-600 rounded-full hover:bg-gray-500 transition-colors;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@layer components {
+  /* ChatGPT Layout - Exact Match */
+  .chatgpt-layout {
+    @apply flex h-screen bg-[#343541];
+  }
+
+  .chatgpt-sidebar {
+    @apply bg-[#202123] border-r border-gray-700 flex flex-col fixed lg:relative inset-y-0 z-40 transform transition-all duration-300 ease-in-out;
+    width: 16rem; /* 256px */
+  }
+
+  /* RTL Support */
+  [dir="rtl"] .chatgpt-sidebar {
+    @apply right-0 border-l border-r-0;
+  }
+
+  /* LTR Support */
+  [dir="ltr"] .chatgpt-sidebar {
+    @apply left-0 border-r;
+  }
+
+  .chatgpt-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chatgpt-sidebar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .chatgpt-sidebar.collapsed {
+    width: 5rem; /* 80px */
+  }
+
+  .chatgpt-sidebar.closed {
+    @apply -translate-x-full lg:translate-x-0;
+  }
+
+  .chatgpt-main {
+    @apply flex-1 flex flex-col bg-[#343541] lg:ml-0;
+  }
+
+  .chatgpt-header {
+    @apply bg-[#343541] px-6 py-4 flex items-center justify-between border-b border-gray-700/50;
+  }
+
+  .chatgpt-messages {
+    @apply flex-1 overflow-y-auto;
+  }
+
+  /* .chatgpt-input-container {
+    @apply bg-[#343541] p-4 ;
+  } */
+
+  /* Sidebar Styles - Exact ChatGPT */
+  .sidebar-new-chat {
+    @apply flex items-center gap-3 px-3 py-3 text-gray-200 hover:bg-emerald-500/10 rounded-lg cursor-pointer transition-colors mb-3 mx-3 border border-transparent hover:border-emerald-500/20;
+  }
+
+  .sidebar-search {
+    @apply mx-3 mb-6;
+  }
+
+  .sidebar-search-input {
+    @apply w-full bg-gray-700 text-gray-200 px-3 py-2 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-600 transition-all;
+  }
+
+  .sidebar-section {
+    @apply px-4 py-3;
+  }
+
+  .sidebar-section-title {
+    @apply text-xs font-medium text-gray-400 uppercase tracking-wider mb-2;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-3 py-2.5 text-gray-200 hover:bg-gray-700 rounded-lg cursor-pointer transition-colors text-sm mx-3 mb-1;
+  }
+
+  .sidebar-item.active {
+    @apply bg-gray-700 text-white;
+  }
+
+  .sidebar-chat-item {
+    @apply flex items-center gap-3 px-3 py-2.5 text-gray-200 hover:bg-gray-700 rounded-lg cursor-pointer transition-colors text-sm truncate mx-3 mb-1;
+  }
+
+  .sidebar-chat-item.active {
+    @apply bg-gray-700 text-white;
+  }
+
+  /* Removed drag and drop styles */
+
+  /* Image Preview Styles */
+  .image-preview-container {
+    @apply mt-3 p-3 bg-gray-800/50 rounded-lg border border-gray-600;
+  }
+
+  .image-preview-grid {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .image-preview-item {
+    @apply relative group;
+  }
+
+  .image-preview-img {
+    @apply w-16 h-16 object-cover rounded-lg border border-gray-600;
+  }
+
+  .image-preview-remove {
+    @apply absolute -top-2 -right-2 w-6 h-6 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity;
+  }
+
+  /* Dropdown Styles */
+  .chat-input-dropdown {
+    @apply absolute bottom-full mb-2 bg-gray-800 border border-gray-600 rounded-lg shadow-xl z-50 min-w-48;
+  }
+
+  .dropdown-item {
+    @apply w-full flex items-center gap-3 px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-left;
+  }
+
+  .dropdown-item-icon {
+    @apply text-emerald-400;
+  }
+
+  .sidebar-chat-item.has-new {
+    @apply relative;
+  }
+
+  .sidebar-chat-item.has-new::after {
+    content: '';
+    @apply absolute left-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-blue-500 rounded-full;
+  }
+
+  /* User Profile */
+  .user-profile {
+    @apply p-4 border-t border-gray-700 mt-auto;
+  }
+
+  .user-avatar {
+    @apply w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-white text-sm;
+  }
+
+  .user-info {
+    @apply mt-2 text-sm;
+  }
+
+  .user-name {
+    @apply text-white font-medium;
+  }
+
+  .user-status {
+    @apply text-gray-400 text-xs;
+  }
+
+  /* User Menu */
+  .user-menu {
+    @apply absolute bottom-full left-0 mb-2 w-64 bg-[#343541] rounded-lg border border-gray-600 shadow-xl z-50;
+  }
+
+  .user-menu-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-gray-700 cursor-pointer transition-colors text-sm;
+  }
+
+  .user-menu-item.danger {
+    @apply text-red-400 hover:text-red-300;
+  }
+
+  /* Message Styles - Exact ChatGPT */
+  .message-container {
+    @apply flex items-start gap-4 py-6 px-4;
+  }
+
+  .message-container.user {
+    @apply bg-[#40414f];
+  }
+
+  .message-container.bot {
+    @apply bg-[#343541];
+  }
+
+  .message-avatar {
+    @apply w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 mt-1;
+  }
+
+  .message-avatar.user {
+    @apply bg-emerald-500;
+  }
+
+  .message-avatar.bot {
+    @apply bg-gradient-to-br from-emerald-500 via-green-500 to-emerald-600;
+  }
+
+  .message-content {
+    @apply flex-1 max-w-4xl mx-auto;
+  }
+
+  .message-text {
+    @apply text-gray-100 leading-relaxed whitespace-pre-wrap text-base;
+    line-height: 1.6;
+  }
+
+  .message-text.user {
+    @apply text-white;
+  }
+
+  .message-text.bot {
+    @apply text-gray-100;
+  }
+
+  /* Message Actions - Exact ChatGPT */
+  .message-actions {
+    @apply flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity;
+  }
+
+  .action-button {
+    @apply p-1 text-gray-400 hover:text-white hover:bg-gray-600 rounded transition-colors;
+  }
+
+  /* Input Styles - Enhanced ChatGPT */
+  .chatgpt-input-wrapper {
+    @apply max-w-4xl mx-auto relative;
+  }
+
+  .chatgpt-input {
+    @apply w-full bg-[#40414f] border border-gray-600 rounded-xl px-4 py-3 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 resize-none shadow-lg transition-all duration-200;
+    min-height: 56px;
+    max-height: 200px;
+    font-size: 16px;
+  }
+
+  .chatgpt-input:focus {
+    @apply border-emerald-500 shadow-xl shadow-emerald-500/10;
+  }
+
+  .chatgpt-input:hover {
+    @apply border-gray-500;
+  }
+
+  .chatgpt-send-button {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-white hover:bg-gray-600 rounded-lg transition-all duration-200;
+  }
+
+  .chatgpt-send-button:disabled {
+    @apply text-gray-600 cursor-not-allowed hover:bg-transparent;
+  }
+
+  .chatgpt-send-button:not(:disabled):hover {
+    @apply bg-gray-600 text-white;
+  }
+
+  /* Welcome Screen - Exact ChatGPT */
+  .welcome-container {
+    @apply flex-1 flex items-center justify-center p-8;
+  }
+
+  .welcome-content {
+    @apply max-w-3xl mx-auto text-center;
+  }
+
+  .welcome-title {
+    @apply text-5xl font-bold text-white mb-12;
+    background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Header Styles - Exact ChatGPT */
+  .header-title {
+    @apply text-xl font-semibold text-white;
+  }
+
+  .header-button {
+    @apply p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors;
+  }
+
+  /* Settings Modal */
+  .settings-modal {
+    @apply fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4;
+  }
+
+  .settings-content {
+    @apply bg-[#40414f] rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden z-[10000];
+  }
+
+  .settings-header {
+    @apply flex items-center justify-between p-4 border-b border-gray-600;
+  }
+
+  .settings-sidebar {
+    @apply w-48 bg-[#343541] border-r border-gray-600;
+  }
+
+  .settings-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-gray-700 cursor-pointer transition-colors;
+  }
+
+  .settings-nav-item.active {
+    @apply bg-gray-700 text-white;
+  }
+
+  .settings-panel {
+    @apply flex-1 p-6 overflow-y-auto;
+  }
+
+  .settings-section {
+    @apply mb-6;
+  }
+
+  .settings-label {
+    @apply text-sm font-medium text-gray-300 mb-2;
+  }
+
+  .settings-select {
+    @apply w-full bg-[#343541] border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-gray-500;
+  }
+
+  .settings-toggle {
+    @apply relative inline-flex h-6 w-11 items-center rounded-full bg-gray-600 transition-colors;
+  }
+
+  .settings-toggle.active {
+    @apply bg-emerald-500;
+  }
+
+  .settings-toggle-thumb {
+    @apply inline-block h-4 w-4 transform rounded-full bg-white transition-transform;
+  }
+
+  .settings-toggle.active .settings-toggle-thumb {
+    @apply translate-x-5;
+  }
+
+  /* Dropdown */
+  .dropdown {
+    @apply relative inline-block;
+  }
+
+  .dropdown-content {
+    @apply absolute top-full left-0 mt-1 bg-[#40414f] border border-gray-600 rounded-lg shadow-lg z-[1000] min-w-32;
+  }
+
+  .dropdown-item {
+    @apply px-3 py-2 text-gray-200 hover:bg-gray-700 cursor-pointer transition-colors text-sm;
+  }
+
+  .dropdown-item.active {
+    @apply bg-emerald-600 text-white;
+  }
+
+  .settings-input {
+    @apply w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors;
+  }
+
+
+
+  /* Loading States */
+  .loading-overlay {
+    @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999];
+  }
+
+  .loading-spinner {
+    @apply w-8 h-8 border-2 border-gray-600 border-t-emerald-500 rounded-full animate-spin;
+  }
+
+  /* Enhanced loading animations */
+  .loading-pulse {
+    animation: loadingPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes loadingPulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Gradient text animations */
+  .gradient-text {
+    background: linear-gradient(135deg, #10b981, #059669, #047857);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Enhanced button hover effects */
+  .btn-gradient {
+    background: linear-gradient(135deg, #10b981, #059669);
+    transition: all 0.3s ease;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Tablet and Mobile Responsive */
+  @media (max-width: 1024px) {
+    .chatgpt-sidebar {
+      @apply fixed left-0 top-0 h-full z-50 transform transition-transform duration-300;
+    }
+
+    .chatgpt-sidebar.closed {
+      @apply -translate-x-full;
+    }
+
+    .chatgpt-main {
+      @apply w-full;
+    }
+
+    .settings-content {
+      @apply max-w-full mx-4;
+    }
+
+    .user-menu {
+      @apply w-full left-0;
+    }
+  }
+
+  /* Mobile Specific */
+  @media (max-width: 768px) {
+    .chatgpt-header {
+      @apply px-4 py-3;
+    }
+
+    .header-title {
+      @apply text-lg;
+    }
+
+    /* .chatgpt-input-container {
+      @apply p-3;
+    } */
+
+    .message-container {
+      @apply px-3 py-4;
+    }
+
+    .sidebar-new-chat {
+      @apply mx-2 mb-2;
+    }
+
+    .sidebar-item,
+    .sidebar-chat-item {
+      @apply mx-2;
+    }
+
+    /* Enhanced Mobile Chat Input - No padding for icons */
+    .chatgpt-input {
+      @apply px-4 py-4 text-base;
+      min-height: 60px;
+      padding-right: 16px; /* Remove extra padding for icons */
+      padding-left: 16px;
+    }
+
+    /* Mobile Icon Enhancements */
+    .mobile\:p-3 {
+      padding: 0.75rem;
+    }
+
+    .mobile\:gap-3 {
+      gap: 0.75rem;
+    }
+
+    .mobile\:min-w-12 {
+      min-width: 3rem;
+    }
+
+    .mobile\:min-h-12 {
+      min-height: 3rem;
+    }
+
+    .mobile\:flex {
+      display: flex;
+    }
+
+    .mobile\:items-center {
+      align-items: center;
+    }
+
+    .mobile\:justify-center {
+      justify-content: center;
+    }
+
+    .mobile\:bg-gray-700\/50 {
+      background-color: rgba(55, 65, 81, 0.5);
+    }
+
+    .mobile\:hover\:bg-gray-600\/50:hover {
+      background-color: rgba(75, 85, 99, 0.5);
+    }
+
+    .mobile\:bg-red-500\/20 {
+      background-color: rgba(239, 68, 68, 0.2);
+    }
+
+    .mobile\:shadow-lg {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .mobile\:shadow-emerald-500\/25 {
+      box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.25), 0 4px 6px -2px rgba(16, 185, 129, 0.1);
+    }
+
+    .mobile\:scale-110 {
+      transform: scale(1.1);
+    }
+
+    .mobile\:min-w-56 {
+      min-width: 14rem;
+    }
+
+    .mobile\:text-base {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    .mobile\:right-0 {
+      right: 0;
+    }
+
+    .mobile\:left-auto {
+      left: auto;
+    }
+
+    /* Enhanced mobile button interactions */
+    /* .chatgpt-input-container button {
+      @apply transition-all duration-200;
+    }
+
+    .chatgpt-input-container button:hover {
+      @apply transform scale-105;
+    }
+
+    .chatgpt-input-container button:active {
+      @apply transform scale-95;
+    } */
+
+    /* Ensure icons are properly positioned on mobile */
+    .chatgpt-input-wrapper .absolute {
+      @apply z-10;
+    }
+  }
+
+  /* Animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    @apply flex items-center gap-2 px-4 py-3;
+  }
+
+  .typing-dot {
+    @apply w-2 h-2 bg-gray-400 rounded-full animate-pulse;
+  }
+
+  .typing-dot:nth-child(1) { animation-delay: 0ms; }
+  .typing-dot:nth-child(2) { animation-delay: 150ms; }
+  .typing-dot:nth-child(3) { animation-delay: 300ms; }
+
+  /* Focus States */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#343541];
+  }
+
+  /* Toast Notifications */
+  .toast {
+    @apply fixed top-4 right-4 bg-gradient-to-r from-emerald-500 to-green-600 text-white px-4 py-2 rounded-lg z-[10000] shadow-lg;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Code Blocks */
+  .code-block {
+    @apply bg-[#1e1e1e] border border-gray-600 rounded-lg p-4 my-4 overflow-x-auto;
+  }
+
+  .code-block pre {
+    @apply text-sm text-gray-200;
+  }
+
+  /* Markdown Styles */
+  .markdown-content {
+    @apply text-gray-100 leading-relaxed;
+  }
+
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    @apply text-white font-semibold mb-4;
+  }
+
+  .markdown-content p {
+    @apply mb-4;
+  }
+
+  .markdown-content ul,
+  .markdown-content ol {
+    @apply mb-4 pr-6;
+  }
+
+  .markdown-content li {
+    @apply mb-2;
+  }
+
+  .markdown-content code {
+    @apply bg-gray-700 px-2 py-1 rounded text-sm;
+  }
+
+  .markdown-content pre {
+    @apply bg-[#1e1e1e] border border-gray-600 rounded-lg p-4 my-4 overflow-x-auto;
+  }
+
+  .markdown-content blockquote {
+    @apply border-r-4 border-gray-600 pr-4 my-4 italic text-gray-300;
+  }
+
+  /* Loading States */
+  .loading-shimmer {
+    background: linear-gradient(90deg, #40414f 25%, #4a4b57 50%, #40414f 75%);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+  }
+
+  /* Scroll to bottom indicator */
+  .scroll-indicator {
+    @apply absolute bottom-4 right-4 w-8 h-8 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center text-gray-400 hover:text-white cursor-pointer transition-all duration-300 z-50;
+  }
+
+  /* Message numbering */
+  .message-number {
+    @apply text-xs text-gray-500 font-mono;
+  }
+
+  /* Voice input indicator */
+  .voice-indicator {
+    @apply flex items-center gap-2 text-gray-400;
+  }
+
+  .voice-wave {
+    @apply flex items-center gap-1;
+  }
+
+  .voice-bar {
+    @apply w-1 bg-gray-400 rounded-full animate-pulse;
+  }
+
+  .voice-bar:nth-child(1) { height: 8px; animation-delay: 0ms; }
+  .voice-bar:nth-child(2) { height: 12px; animation-delay: 100ms; }
+  .voice-bar:nth-child(3) { height: 16px; animation-delay: 200ms; }
+  .voice-bar:nth-child(4) { height: 12px; animation-delay: 300ms; }
+  .voice-bar:nth-child(5) { height: 8px; animation-delay: 400ms; }
+
+  /* Voice input popup */
+  .voice-popup {
+    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 p-3 bg-[#40414f] rounded-lg shadow-lg border border-gray-600 z-[1000];
+  }
+
+  /* Enhanced Input Styles - ChatGPT Exact */
+  /* .chatgpt-input-container {
+    @apply bg-[#343541] p-4;
+  } */
+
+  .chatgpt-input-wrapper {
+    @apply max-w-4xl mx-auto relative;
+  }
+
+  .chatgpt-input {
+    @apply w-full bg-[#40414f] border border-gray-600 rounded-xl px-4 py-3 text-gray-100 placeholder-gray-400 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 resize-none shadow-lg transition-all duration-200;
+    min-height: 56px;
+    max-height: 200px;
+    font-size: 16px;
+  }
+
+  .chatgpt-input:focus {
+    @apply border-emerald-500 shadow-xl shadow-emerald-500/10;
+  }
+
+  .chatgpt-input:hover {
+    @apply border-gray-500;
+  }
+
+  .chatgpt-send-button {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-white hover:bg-gray-600 rounded-lg transition-all duration-200;
+  }
+
+  .chatgpt-send-button:disabled {
+    @apply text-gray-600 cursor-not-allowed hover:bg-transparent;
+  }
+
+  .chatgpt-send-button:not(:disabled):hover {
+    @apply bg-gray-600 text-white;
+  }
+
+  /* Enhanced Message Styles */
+  .message-container {
+    @apply flex items-start gap-4 py-6 px-4;
+  }
+
+  .message-container.user {
+    @apply bg-[#40414f];
+  }
+
+  .message-container.bot {
+    @apply bg-[#343541];
+  }
+
+  .message-avatar {
+    @apply w-8 h-8 rounded-sm flex items-center justify-center flex-shrink-0 mt-1;
+  }
+
+  .message-avatar.user {
+    @apply bg-emerald-500;
+  }
+
+  .message-avatar.bot {
+    @apply bg-[#f7f7f8];
+  }
+
+  .message-content {
+    @apply flex-1 max-w-4xl mx-auto;
+  }
+
+  .message-text {
+    @apply text-gray-100 leading-relaxed whitespace-pre-wrap text-base;
+    line-height: 1.6;
+  }
+
+  .message-text.user {
+    @apply text-white;
+  }
+
+  .message-text.bot {
+    @apply text-gray-100;
+  }
+
+  /* Enhanced Welcome Screen */
+  .welcome-container {
+    @apply flex-1 flex items-center justify-center p-8;
+  }
+
+  .welcome-content {
+    @apply max-w-3xl mx-auto text-center;
+  }
+
+  .welcome-title {
+    @apply text-5xl font-bold text-white mb-12;
+    background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Enhanced Header */
+  .chatgpt-header {
+    @apply bg-[#343541] px-6 py-4 flex items-center justify-between border-b border-gray-700/50;
+  }
+
+  .header-title {
+    @apply text-xl font-semibold text-white;
+  }
+
+  .header-button {
+    @apply p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors flex items-center justify-center;
+  }
+
+  /* Enhanced Sidebar */
+  .sidebar-new-chat {
+    @apply flex items-center gap-3 px-4 py-4 text-gray-200 hover:bg-emerald-500/10 rounded-lg cursor-pointer transition-colors mb-4 mx-4 border border-transparent hover:border-emerald-500/20;
+  }
+
+  .sidebar-new-chat.justify-center {
+    justify-content: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.75rem;
+    min-height: 3rem;
+  }
+
+  .sidebar-new-chat.justify-center svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .sidebar-search {
+    @apply mx-4 mb-6;
+  }
+
+  .sidebar-search-input {
+    @apply w-full bg-gray-700 text-gray-200 px-4 py-3 rounded-lg text-sm placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-emerald-500/10 rounded-lg cursor-pointer transition-colors text-sm mx-4 mb-1;
+  }
+
+  .sidebar-item.justify-center {
+    justify-content: center;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.75rem;
+    min-height: 3rem;
+  }
+
+  .sidebar-item.justify-center svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .sidebar-item.active {
+    @apply bg-emerald-500/20 text-emerald-300 border border-emerald-500/30;
+  }
+
+  .sidebar-chat-item {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-200 hover:bg-emerald-500/10 rounded-lg cursor-pointer transition-colors text-sm truncate mx-4 mb-1;
+  }
+
+  .sidebar-chat-item.active {
+    @apply bg-emerald-500/20 text-emerald-300 border border-emerald-500/30;
+  }
+} 

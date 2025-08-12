@@ -1,0 +1,42 @@
+{
+  "name": "chatbot-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "setup:env": "cp env.example .env && echo '✅ ملف .env تم إنشاؤه بنجاح'",
+    "setup:env:local": "cp env.local.example .env.local && echo '✅ ملف .env.local تم إنشاؤه بنجاح'",
+    "setup:env:staging": "cp env.staging.example .env.staging && echo '✅ ملف .env.staging تم إنشاؤه بنجاح'",
+    "setup:env:production": "cp env.production.example .env.production && echo '✅ ملف .env.production تم إنشاؤه بنجاح'",
+    "setup:all": "npm run setup:env && npm run setup:env:local && npm run setup:env:staging && npm run setup:env:production && echo '✅ جميع ملفات .env تم إنشاؤها بنجاح'"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^10.18.0",
+    "gsap": "^3.13.0",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "keywords": [
+    "chatbot",
+    "trading",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
+  "author": "Pro Traders Group",
+  "license": "MIT",
+  "description": "Modern trading chatbot interface built with React, TypeScript, and Tailwind CSS"
+}
